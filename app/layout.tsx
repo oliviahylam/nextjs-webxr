@@ -19,9 +19,10 @@ const geistMono = Geist_Mono({
 
 // Metadata for SEO and browser tab display
 // This information appears in search results and when sharing links
+// Added viewport settings needed for WebXR functionality
 export const metadata: Metadata = {
-  title: "Next.js React Three Fiber Tutorial",
-  description: "Learn 3D web development with React Three Fiber and Next.js",
+  title: "Next.js React Three Fiber XR Tutorial",
+  description: "Learn 3D web development with WebXR, React Three Fiber and Next.js",
 };
 
 // Root Layout Component - this wraps every page in our application
@@ -34,6 +35,10 @@ export default function RootLayout({
   return (
     // The html element with language attribute for accessibility
     <html lang="en">
+      {/* Add viewport meta tag needed for WebXR */}
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body
         // Apply our custom fonts using CSS variables and add antialiasing for smooth text
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
