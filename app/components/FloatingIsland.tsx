@@ -5,7 +5,8 @@
 import React, { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { StylizedMoss, StylizedSand } from '../shaders/SurfaceShaders'
+// Unused shaders - keeping imports for future use
+// import { StylizedMoss, StylizedSand } from '../shaders/SurfaceShaders'
 
 export function FloatingIsland(props: React.ComponentProps<'group'>) {
   const islandRef = useRef<THREE.Group>(null!)

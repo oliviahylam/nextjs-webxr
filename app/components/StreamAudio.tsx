@@ -2,11 +2,9 @@
 // Spatial audio that responds to user position and creates immersive water ambiance
 
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
-import { useThree } from '@react-three/fiber'
+import { useEffect, useRef, useState, useCallback } from 'react'
 
 export function StreamAudio() {
-  const { camera } = useThree()
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const audioRefs = useRef<{
@@ -20,7 +18,7 @@ export function StreamAudio() {
   useEffect(() => {
     const initAudio = async () => {
       if (!audioContext) {
-        const ctx = new (window.AudioContext || (window as any).webkitAudioContext)()
+        const ctx = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
         setAudioContext(ctx)
         
         // Create gain node for volume control
@@ -150,7 +148,7 @@ export function StreamAudio() {
   }
 
   // Start stream audio
-  const startStreamAudio = () => {
+  const startStreamAudio = useCallback(() => {
     if (!audioContext || isPlaying) return
     
     try {
@@ -172,7 +170,7 @@ export function StreamAudio() {
     } catch (error) {
       console.log('Could not start stream audio:', error)
     }
-  }
+  }, [audioContext, isPlaying])
 
   // Stop stream audio
   const stopStreamAudio = () => {

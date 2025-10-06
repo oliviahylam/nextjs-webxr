@@ -2,11 +2,9 @@
 // This component adds the sounds of flowing water, birds, and gentle breeze
 
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
-import { useThree } from '@react-three/fiber'
+import { useEffect, useRef, useState, useCallback } from 'react'
 
 export function AmbientSounds() {
-  const { camera } = useThree()
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const audioRefs = useRef<{
@@ -20,7 +18,7 @@ export function AmbientSounds() {
   useEffect(() => {
     const initAudio = async () => {
       if (!audioContext) {
-        const ctx = new (window.AudioContext || (window as any).webkitAudioContext)()
+        const ctx = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
         setAudioContext(ctx)
         
         // Create a gain node for volume control
@@ -137,7 +135,7 @@ export function AmbientSounds() {
   }
 
   // Start playing ambient sounds
-  const startAmbientSounds = () => {
+  const startAmbientSounds = useCallback(() => {
     if (!audioContext || isPlaying) return
     
     try {
@@ -159,7 +157,7 @@ export function AmbientSounds() {
     } catch (error) {
       console.log('Could not start ambient sounds:', error)
     }
-  }
+  }, [audioContext, isPlaying])
 
   // Stop ambient sounds
   const stopAmbientSounds = () => {

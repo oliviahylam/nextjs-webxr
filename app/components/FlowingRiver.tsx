@@ -3,7 +3,8 @@
 
 import React, { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Plane } from '@react-three/drei'
+// Unused import - keeping for future use
+// import { Plane } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function FlowingRiver(props: React.ComponentProps<'group'>) {
