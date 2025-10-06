@@ -37,35 +37,35 @@ export function ZenDome(props: React.ComponentProps<'group'>) {
     })
   }, [])
   
-  // Create decorative arches around the dome base
-  const archGeometry = useMemo(() => {
-    const arches = new THREE.Group()
-    
-    // Create 8 arches around the dome perimeter
-    for (let i = 0; i < 8; i++) {
-      const angle = (i / 8) * Math.PI * 2
-      
-      // Arch geometry - torus section
-      const archGeo = new THREE.TorusGeometry(
-        2.5,   // radius
-        0.3,   // tube thickness
-        8,     // radialSegments
-        16,    // tubularSegments
-        Math.PI // arc - half circle for arch shape
-      )
-      
-      // Position arch around dome perimeter
-      const x = Math.cos(angle) * 12
-      const z = Math.sin(angle) * 12
-      
-      archGeo.translate(x, 3, z)
-      archGeo.rotateY(angle + Math.PI / 2) // Face inward
-      
-      arches.add(new THREE.Mesh(archGeo))
-    }
-    
-    return arches
-  }, [])
+  // Decorative arches - currently unused but kept for future enhancement
+  // const archGeometry = useMemo(() => {
+  //   const arches = new THREE.Group()
+  //   
+  //   // Create 8 arches around the dome perimeter
+  //   for (let i = 0; i < 8; i++) {
+  //     const angle = (i / 8) * Math.PI * 2
+  //     
+  //     // Arch geometry - torus section
+  //     const archGeo = new THREE.TorusGeometry(
+  //       2.5,   // radius
+  //       0.3,   // tube thickness
+  //       8,     // radialSegments
+  //       16,    // tubularSegments
+  //       Math.PI // arc - half circle for arch shape
+  //     )
+  //     
+  //     // Position arch around dome perimeter
+  //     const x = Math.cos(angle) * 12
+  //     const z = Math.sin(angle) * 12
+  //     
+  //     archGeo.translate(x, 3, z)
+  //     archGeo.rotateY(angle + Math.PI / 2) // Face inward
+  //     
+  //     arches.add(new THREE.Mesh(archGeo))
+  //   }
+  //   
+  //   return arches
+  // }, [])
   
   // Create monumental architectural columns
   const createColumns = useMemo(() => {
@@ -81,7 +81,7 @@ export function ZenDome(props: React.ComponentProps<'group'>) {
           key={`column-${i}`}
           position={[x, 15, z]}  // Taller columns for monumental scale
         >
-          <cylinderGeometry args={[1.2, 1.5, 30, 16]} />  // Larger, more detailed columns
+          <cylinderGeometry args={[1.2, 1.5, 30, 16]} />  {/* Larger, more detailed columns */}
           <meshStandardMaterial
             color="#ede3d3"      // Light stone columns
             roughness={0.8}

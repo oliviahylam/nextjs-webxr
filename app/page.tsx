@@ -4,7 +4,7 @@
 
 // Import required components for 3D scene
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Text, Sky, Grid } from '@react-three/drei';
+import { OrbitControls, Text } from '@react-three/drei';
 import { Model as PottedPlant } from './components/PottedPlant';
 import { Cube } from './components/Cube';
 
@@ -15,8 +15,9 @@ import { BonsaiTrees } from './components/BonsaiTrees';
 import { ZenRabbits } from './components/ZenRabbits';
 import { MeditativeRabbits } from './components/LowPolyRabbit';
 import { GlowingStream } from './components/GlowingStream';
-import { MeditativeStream } from './components/MeditativeStream';
-import { SimpleStream } from './components/SimpleStream';
+// Unused stream components - keeping imports for future use
+// import { MeditativeStream } from './components/MeditativeStream';
+// import { SimpleStream } from './components/SimpleStream';
 import { FlowingWaterStream } from './components/FlowingWaterStream';
 import { ZenDome } from './components/ZenDome';
 import { AtmosphericEffects } from './components/AtmosphericEffects';
@@ -28,7 +29,7 @@ import { AmbientSounds } from './components/AmbientSounds';
 import { GradientSky, VolumetricFog } from './shaders/SkyShader';
 
 // Import WebXR components - these enable AR and VR functionality
-import { XR, createXRStore, useXRStore } from '@react-three/xr';
+import { XR, createXRStore } from '@react-three/xr';
 import { useState, useEffect } from 'react';
 
 // Create XR store outside of component to persist across re-renders

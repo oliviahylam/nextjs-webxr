@@ -1,7 +1,7 @@
 // Water Fountain Component - Creates beautiful water features
 // Multiple fountains with animated water droplets and pools
 
-import React, { useRef, useMemo } from 'react'
+import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 

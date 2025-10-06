@@ -201,7 +201,7 @@ export function StreamAudio() {
       document.removeEventListener('touchstart', handleInteraction)
       stopStreamAudio()
     }
-  }, [audioContext])
+  }, [audioContext, startStreamAudio])
 
   // This component doesn't render visually
   return null

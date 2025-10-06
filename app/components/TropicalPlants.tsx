@@ -1,7 +1,7 @@
 // Tropical Plants Component - Creates lush oasis vegetation
 // Palm trees, ferns, and hanging vines to complete the oasis atmosphere
 
-import React, { useRef, useMemo } from 'react'
+import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
