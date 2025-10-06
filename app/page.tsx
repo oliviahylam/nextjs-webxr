@@ -4,9 +4,28 @@
 
 // Import required components for 3D scene
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Grid, Text } from '@react-three/drei';
+import { OrbitControls, Text, Sky, Grid } from '@react-three/drei';
 import { Model as PottedPlant } from './components/PottedPlant';
 import { Cube } from './components/Cube';
+
+// Import Japanese zen garden components
+import { FloatingIsland } from './components/FloatingIsland';
+import { StonePaths } from './components/StonePaths';
+import { BonsaiTrees } from './components/BonsaiTrees';
+import { ZenRabbits } from './components/ZenRabbits';
+import { MeditativeRabbits } from './components/LowPolyRabbit';
+import { GlowingStream } from './components/GlowingStream';
+import { MeditativeStream } from './components/MeditativeStream';
+import { SimpleStream } from './components/SimpleStream';
+import { FlowingWaterStream } from './components/FlowingWaterStream';
+import { ZenDome } from './components/ZenDome';
+import { AtmosphericEffects } from './components/AtmosphericEffects';
+import { StreamAudio } from './components/StreamAudio';
+import { AtmosphericMist } from './components/AtmosphericMist';
+import { AmbientSounds } from './components/AmbientSounds';
+
+// Import custom shaders
+import { GradientSky, VolumetricFog } from './shaders/SkyShader';
 
 // Import WebXR components - these enable AR and VR functionality
 import { XR, createXRStore, useXRStore } from '@react-three/xr';
@@ -89,92 +108,129 @@ export default function Home() {
           The store prop connects to our XR state management
         */}
         <XR store={store}>
-          {/* 
-            LIGHTING SETUP
-            We use multiple light sources to create depth and visual interest
-            In XR, lighting becomes even more important for presence and immersion
-          */}
-          
-          {/* Ambient light provides soft, overall illumination without direction */}
-          <ambientLight intensity={0.6} />
-          
-          {/* Directional light simulates sunlight - comes from one direction */}
-          <directionalLight 
-            position={[10, 10, 5]}  // Position in 3D space [x, y, z]
-            intensity={0.8}         // Slightly dimmer for XR comfort
-            castShadow              // Enable this light to cast shadows
-          />
-          
-          {/* Point light radiates in all directions from a single point */}
-          <pointLight 
-            position={[-10, -10, -5]}  // Positioned opposite to main light
-            intensity={0.3}            // Dimmer than main light
-            color="#ffffff"            // Pure white light
-          />
           
           {/* 
-            3D OBJECTS - Now XR Interactive!
-            These objects can be grabbed, pointed at, and interacted with in XR
+            MONUMENTAL ZEN DOME ENVIRONMENT
+            Creates a massive architectural dome with dramatic skylight opening
+          */}
+          <ZenDome />
+          
+          {/* 
+            ATMOSPHERIC EFFECTS
+            Dust particles and light rays streaming through the skylight
+          */}
+          <AtmosphericEffects />
+          
+          {/* 
+            MINIMAL SCENE LIGHTING
+            The dome now provides the main lighting system
+            Only subtle fill lights remain for balance
           */}
           
-          {/* Interactive orange cube - can be grabbed and moved in XR */}
+          {/* Minimal ambient fill to prevent pure black shadows */}
+          <ambientLight intensity={0.1} color="#f8f5f0" />
+        
+        {/* 
+            CUSTOM GRADIENT SKY
+            Warm lavender to gold gradient with volumetric fog near horizon
+          */}
+          <GradientSky />
+          
+          {/* Enhanced volumetric fog layers */}
+          <VolumetricFog />
+          
+          {/* Scene fog for depth */}
+          <fog attach="fog" args={['#f5f0e8', 20, 80]} />
+
+          {/* 
+            JAPANESE ZEN GARDEN ELEMENTS
+            Floating island sanctuary with natural beauty
+          */}
+          
+          {/* Circular floating island foundation */}
+          <FloatingIsland />
+          
+          {/* Curved stone pathways winding through the garden */}
+          <StonePaths />
+          
+          {/* Authentic bonsai trees with detailed branches */}
+          <BonsaiTrees />
+          
+          {/* Original stone rabbit sculptures */}
+          <ZenRabbits />
+          
+          {/* New low-poly meditative rabbits with ceramic surface */}
+          <MeditativeRabbits />
+          
+          {/* Original glowing stream with lily pads */}
+          <GlowingStream />
+          
+          {/* Flowing water stream with proper shader effects */}
+          <FlowingWaterStream position={[0, 0, 0]} />
+          
+          {/* Other streams commented out for now */}
+          {/* <SimpleStream position={[0, 0, 0]} /> */}
+          {/* <MeditativeStream position={[0, 0, 0]} /> */}
+          
+          {/* Dedicated stream audio for flowing water sounds */}
+          <StreamAudio />
+          
+          {/* Light mist and atmospheric effects */}
+          <AtmosphericMist />
+          
+          {/* Enhanced ambient nature sounds */}
+          <AmbientSounds />
+
+          {/* 
+            INTERACTIVE ZEN ELEMENTS
+            Peaceful objects that can be contemplated and moved in XR
+          */}
+          
+          {/* Floating meditation stone - transformed cube */}
           <Cube 
-            position={[2, 1, -2]}
-            // XR-specific interaction properties
-            // pointerEventsType controls how XR controllers interact with this object
-            // 'grab' allows picking up and moving the object
-            // 'select' allows clicking/touching the object
-            // 'none' disables XR interactions
+            position={[5, 4, 2]}
+            scale={0.6}
           />
           
-          {/* Interactive potted plant - enhanced for XR interaction */}
+          {/* Sacred bonsai in special position */}
           <PottedPlant 
-            scale={10} 
-            // Enable XR grab interactions - users can pick up and move the plant
-            // This works with both hand tracking and controllers
+            scale={6}
+            position={[0, 2.2, 0]}
           />
           
-          {/* Welcome text that appears in 3D space */}
+          {/* Welcome message with zen garden theme */}
           <Text
-            position={[0, 3, -3]}
-            fontSize={0.5}
-            color="#ffffff"
+            position={[0, 8, -20]}
+            fontSize={0.6}
+            color="#654321"         // Dark brown - earth tones
             anchorX="center"
             anchorY="middle"
+            maxWidth={15}
+            textAlign="center"
           >
-            Welcome to WebXR with React Three Fiber!
-            {'\n'}Try grabbing the objects in VR or place them in your space with AR
+            🌸 The Floating Zen Garden 🌸
+            {'\n\n'}Where time flows like the gentle stream
+            {'\n'}Listen to water dancing over smooth stones
+            {'\n'}Ceramic rabbits sit in silent meditation
+            {'\n'}Find peace in this sacred floating sanctuary
           </Text>
           
           {/* 
-            SCENE HELPERS
-            Visual aids that help users understand the 3D space
-            These are especially important in XR for spatial awareness
-          */}
-          
-          {/* Grid floor provides spatial reference and depth perception */}
-          <Grid 
-            args={[20, 20]}           // Grid dimensions: 20x20 units
-            position={[0, -1, 0]}     // Positioned 1 unit below origin
-            cellSize={1}              // Each cell is 1x1 unit
-            cellThickness={0.5}       // Thin lines for individual cells
-            cellColor="#6f6f6f"       // Gray color for cell lines
-            sectionSize={5}           // Major grid lines every 5 cells
-            sectionThickness={1}      // Thicker lines for major sections
-            sectionColor="#9d4b4b"    // Reddish color for section lines
-            fadeDistance={25}         // Grid fades out at this distance
-            fadeStrength={1}          // How quickly the fade happens
-          />
-          
-          {/* 
-            CAMERA CONTROLS
-            OrbitControls work when NOT in XR mode
-            In XR, head movement and controller tracking take over
-          */}
-          <OrbitControls 
-            enablePan={true}      // Allow panning (moving the camera)
-            enableZoom={true}     // Allow zooming in/out
-            enableRotate={true}   // Allow rotating around the scene
+            SMOOTH CAMERA CONTROLS
+            Gentle navigation perfect for contemplating the zen garden
+            Slow, peaceful movement that matches the serene atmosphere
+        */}
+        <OrbitControls 
+            enablePan={true}         // Allow panning around the floating island
+            enableZoom={true}        // Allow zooming to see details
+            enableRotate={true}      // Allow rotating around the garden
+            autoRotate={true}        // Gentle automatic rotation
+            autoRotateSpeed={0.2}    // Very slow, meditative rotation
+            enableDamping={true}     // Smooth, fluid camera movement
+            dampingFactor={0.05}     // Extra smooth damping
+            minDistance={5}          // Don't get too close
+            maxDistance={50}         // Don't get too far away
+            maxPolarAngle={Math.PI / 2.2} // Prevent going under the island
           />
           
         </XR>
