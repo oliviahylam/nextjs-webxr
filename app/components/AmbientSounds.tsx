@@ -187,7 +187,7 @@ export function AmbientSounds() {
       document.removeEventListener('touchstart', handleInteraction)
       stopAmbientSounds()
     }
-  }, [audioContext])
+  }, [audioContext, startAmbientSounds])
 
   // This component doesn't render any visible elements, just manages audio
   return null

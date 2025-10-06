@@ -34,7 +34,7 @@ function FloatingOrb({
       
       // Gentle pulsing glow effect
       const glowIntensity = 0.3 + Math.sin(time * 2) * 0.1
-      if (orbRef.current.material instanceof THREE.MeshBasicMaterial) {
+      if (orbRef.current.material instanceof THREE.MeshStandardMaterial) {
         orbRef.current.material.emissiveIntensity = glowIntensity
       }
     }
@@ -43,12 +43,14 @@ function FloatingOrb({
   return (
     <mesh ref={orbRef} position={position}>
       <sphereGeometry args={[size, 16, 16]} />
-      <meshBasicMaterial
+      <meshStandardMaterial
         color={color}
         emissive={color}
         emissiveIntensity={0.3}
         transparent={true}
         opacity={0.8}
+        roughness={0.1}
+        metalness={0.1}
       />
     </mesh>
   )
